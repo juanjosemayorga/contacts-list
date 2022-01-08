@@ -1,13 +1,16 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Contacts } from './src/screens/Contacts'
+import React from 'react';
+import {StyleSheet} from 'react-native';
+
+import {Contacts} from './src/screens/Contacts';
+import {Profile} from './src/screens/Profile';
 
 const App = () => {
   return (
-    <Contacts />
-  )
-}
+    // <Contacts />
+    <Profile />
+  );
+};
 
-export default App
+export default App;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
