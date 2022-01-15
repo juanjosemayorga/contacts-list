@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Text, StyleSheet, View, FlatList, ActivityIndicator } from 'react-native'
+import { Text, StyleSheet, View, FlatList, ActivityIndicator, ListRenderItemInfo } from 'react-native'
 
 import { fetchContacts } from '../utils/api'
 
 import { Contact } from '../interfaces/interfaces';
-import { renderContact } from '../utils/renderContact';
+import { RenderContact } from '../utils/RenderContact';
 
 interface ContactsState {
   contacts: Contact[];
@@ -18,7 +18,8 @@ const initialState = {
   error: false
 }
 
-export const Contacts = () => {
+// TODO: Type the navigation prop
+export const Contacts = ({ navigation: { navigate } }: any) => {
 
   const [state, setState] = useState<ContactsState>(initialState)
   const { loading, contacts, error } = state
@@ -54,16 +55,17 @@ export const Contacts = () => {
     <View style={styles.container}>
       {loading && <ActivityIndicator size="large" />}
       {error && <Text>Error fetching contacts</Text>}
-      {!loading &&
-        !error && (
-          <FlatList
-            data={contactsSorted}
-            renderItem={renderContact}
-            keyExtractor={(item: Contact) => item.id}
-          />
-        )}
+      {!loading && !error && (
+        <FlatList
+          data={contactsSorted}
+          renderItem={(item: ListRenderItemInfo<Contact>) =>
+            RenderContact(item, navigate)
+          }
+          keyExtractor={(item: Contact) => item.id}
+        />
+      )}
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

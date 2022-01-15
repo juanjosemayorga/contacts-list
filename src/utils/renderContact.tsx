@@ -1,8 +1,12 @@
 import React from "react";
+import { ListRenderItemInfo } from "react-native";
 import ContactListItem from "../components/ContactListItem";
 import { Contact } from "../interfaces/interfaces";
 
-export const renderContact = ({item}: {item: Contact}) => {
+export const RenderContact = (
+  {item}: ListRenderItemInfo<Contact>,
+  navigate: any
+  ) => {
   const {name, avatar, phone} = item;
 
   return (
@@ -10,7 +14,7 @@ export const renderContact = ({item}: {item: Contact}) => {
       name={name}
       avatar={avatar}
       phone={phone}
-      onPress={() => console.log('ContactListItem pressed')}
+      onPress={() => navigate('Profile')}
     />
   );
 };
