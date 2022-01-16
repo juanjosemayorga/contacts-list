@@ -1,43 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 import ContactThumbnail from '../components/ContactThumbnail'
 import DetailListItem from '../components/DetailListItem'
 
-import { fetchRandomContact } from '../utils/api'
-
 import colors from '../utils/colors'
 
 import { Contact } from '../interfaces/interfaces'
+import { StackScreenProps } from '@react-navigation/stack'
 
-interface ProfileState {
-  contact: Contact;
-}
+interface Props extends StackScreenProps<any, any> {}
 
-const initialState: ProfileState = {
-  contact: {} as Contact,
-}
+export const Profile = ({ route }: Props) => {
 
-export const Profile = () => {
-
-  const [state, setState] = useState(initialState)
-  const { contact: { avatar, name, email, phone, cell } } = state
-
-  useEffect(() => {
-    fetchRandomContact()
-      .then(contact => setState({ contact }))
-      .catch(err => console.log(err))
-
-    return () => {
-      setState(initialState)
-    }
-  }, [])
+  const contact: Contact = route?.params?.contact
+  const { avatar, name, email, phone, cell } = contact
 
   return (
     <View style={styles.container}>
       <View style={styles.avatarSection}>
         <ContactThumbnail
-          avatar={avatar || 'https://picsum.photos/200'}
+          avatar={avatar}
           name={name}
           phone={phone}
         />

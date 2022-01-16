@@ -14,7 +14,7 @@ export const RenderContact = (
       name={name}
       avatar={avatar}
       phone={phone}
-      onPress={() => navigate('Profile')}
+      onPress={() => navigate('Profile', { contact: item })}
     />
   );
 };
