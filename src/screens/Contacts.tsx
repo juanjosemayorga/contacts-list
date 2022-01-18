@@ -5,6 +5,9 @@ import { fetchContacts } from '../utils/api'
 
 import { Contact } from '../interfaces/interfaces';
 import { RenderContact } from '../utils/RenderContact';
+import { StackScreenProps } from '@react-navigation/stack';
+
+interface ContactsProps extends StackScreenProps<any, any> {}
 
 interface ContactsState {
   contacts: Contact[];
@@ -19,7 +22,7 @@ const initialState = {
 }
 
 // TODO: Type the navigation prop
-export const Contacts = ({ navigation: { navigate } }: any) => {
+export const Contacts = ({ navigation: { navigate } }: ContactsProps) => {
 
   const [state, setState] = useState<ContactsState>(initialState)
   const { loading, contacts, error } = state
