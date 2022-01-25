@@ -3,12 +3,14 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { StackNavigator } from './src/navigation/StackNavigator';
+// import { StackNavigator } from './src/navigation/StackNavigator';
+import { BottomTabNavigator } from './src/navigation/BottomTabNavigator';
+
 
 const App = () => {
   return (
     <NavigationContainer>
-      <StackNavigator />
+      <BottomTabNavigator />
     </NavigationContainer>
   );
 };
