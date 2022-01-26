@@ -4,18 +4,18 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {ParamListBase, RouteProp} from '@react-navigation/native';
 import colors from '../utils/colors';
 
-import {Contacts} from '../screens/Contacts';
 import {Profile} from '../screens/Profile';
+import {Favorites} from '../screens/Favorites';
 
 const Stack = createStackNavigator();
 
-export const ContactsScreens = () => {
+export const FavoritesScreens = () => {
   return (
-    <Stack.Navigator initialRouteName="Contacts">
+    <Stack.Navigator initialRouteName="FavoritesScreens">
       <Stack.Screen
-        name="ContactsScreen"
-        options={{title: 'Contacts'}}
-        component={Contacts}
+        name="FavoritesScreens"
+        options={{title: 'Favorites'}}
+        component={Favorites}
       />
       <Stack.Screen
         name="Profile"

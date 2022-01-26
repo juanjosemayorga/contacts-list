@@ -1,33 +1,54 @@
 import React from 'react'
-
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import colors from '../utils/colors';
 
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
-import { Contacts } from '../screens/Contacts';
-import { Favorites } from '../screens/Favorites';
 import { User } from '../screens/User';
-import { StackNavigator } from './StackNavigator';
+import { ContactsScreens } from './ContactsScreens';
+import { FavoritesScreens } from './FavoritesScreens';
 
 const Tab = createMaterialBottomTabNavigator();
 
-const icon = <FontAwesome5 name={'list'} />;
-
 export const BottomTabNavigator = () => {
+
+  const getTabBarIcon = (icon: string) => ({ color }: { color: string }) => (
+    <MaterialIcons name={icon} size={26} color={color} />
+  );
+
   return (
-    <Tab.Navigator initialRouteName="Contacts">
+    <Tab.Navigator
+      initialRouteName="Contacts"
+      barStyle={{
+        backgroundColor: colors.greyLight,
+      }}
+      labeled={false}
+      activeColor={colors.blue}
+      inactiveColor={colors.grey}
+    >
       <Tab.Screen
         name="Contacts"
-        component={StackNavigator}
+        component={ContactsScreens}
         options={{
           tabBarLabel: 'Contacts',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome5 name={'home'} color={color} size={26} />
-          ),
+          tabBarIcon: getTabBarIcon('list'),
         }}
       />
-      <Tab.Screen name="Favorites" component={Favorites} />
-      <Tab.Screen name="User" component={User} />
+      <Tab.Screen
+        name="Favorites"
+        component={FavoritesScreens}
+        options={{
+          tabBarLabel: 'Favorites',
+          tabBarIcon: getTabBarIcon('star'),
+        }}
+      />
+      <Tab.Screen
+        name="User"
+        component={User}
+        options={{
+          tabBarLabel: 'Me',
+          tabBarIcon: getTabBarIcon('person'),
+        }}
+      />
     </Tab.Navigator>
   );
 }
